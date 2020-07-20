@@ -16,8 +16,8 @@ const App = () => {
   const [ newName, setNewName ] = useState('') 
   const [ newNumber, setNewNumber ] = useState('')
   const [ newFilter, setNewFilter ] = useState('')
-  const [ persons, setPersons] = useState([])
-  const [notificationMessage, setNotificationMessage] = useState(null)
+  const [ persons, setPersons ] = useState([])
+  const [ notificationMessage, setNotificationMessage ] = useState(null)
 
   const additionMessage = `Added ${newName}`
   const deletionMessage = 'Deleted '
@@ -49,9 +49,11 @@ const App = () => {
         }, 3000)
       })
       .catch(error => {
-        console.log('error creating a person with error code:', error)
+        setNotificationMessage(error.response.data.error)
+        setTimeout(() => {
+          setNotificationMessage(null)
+        }, 5000) 
       })
-      
   }
 
   const handleDelete = deletedName => {
